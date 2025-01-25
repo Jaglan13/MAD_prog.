@@ -1,0 +1,122 @@
+MainActivity.java
+
+package com.example.program1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.constraintlayout.widget. ConstraintLayout;
+
+import android.os.Bundle;
+
+import android.view.View;
+
+import android.widget.CalendarView;
+
+import android.widget.CompoundButton;
+
+import android.widget. ImageButton;
+
+import android.widget. Switch;
+
+import com.google.android.material.snackbar. Snackbar;
+
+public class MainActivity extends AppCompatActivity {
+
+    ImageButton b1;
+
+    Switch s1;
+
+    ConstraintLayout l1;
+
+    @Override
+
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+
+        b1 = findViewById(R.id.custom_button);
+
+        s1 = findViewById(R.id.switch_state);
+
+        l1 = findViewById(R.id.layout);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+
+                Snackbar.make(view, "Button Clicked", Snackbar.LENGTH_LONG).show();
+            }
+            });
+
+s1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+
+                public void onCheckedChanged (CompoundButton compoundButton, boolean isenabled)
+                {
+
+                    if (isenabled)
+
+                    {
+
+                        b1.setEnabled(true);
+
+                        s1.setText("Enabled");
+
+                    }
+
+                    else
+
+                    {
+
+                        b1.setEnabled(false);
+
+                        s1.setText("Disabled");
+
+                    }
+
+                }
+
+            });
+
+            CalendarView calendarView = new CalendarView(getApplicationContext());
+
+            ConstraintLayout.LayoutParams params = new
+                    ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams. MATCH_PARENT,
+                    ConstraintLayout.LayoutParams.MATCH_PARENT );
+
+l1.addView(calendarView, params);
+
+        }
+    }
+
+
+
+
+custom_button.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+
+        android:state_pressed="true"
+
+        android:drawable="@drawable/button_pressed"/>
+    <item
+
+        android:state_enabled="false"
+
+        android:drawable="@drawable/button_disabled"/>
+
+    <item
+
+        android:drawable="@drawable/button_default"/>
+
+</selector>
